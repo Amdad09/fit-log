@@ -50,12 +50,12 @@ const WorkoutContextProvider = ({ children }: WorkoutContextProviderProps) => {
     };
 
     const handleDeleteFromPlan = (id: number) => {
-        toast(`Deleted the workout from today plans`);
+        toast.warning(`Deleted the workout from today plans`);
         setTodayPlans(prev => prev.filter(p => p.id !== id));
     };
 
     const handleDeleteFromSave = (id: number) => {
-        toast(`Deleted the workout from save plans`);
+        toast.warning(`Deleted the workout from save plans`);
         setSavePlans(prev => prev.filter(p => p.id !== id));
     };
 

@@ -7,8 +7,9 @@ interface MyPlanCardProps {
     isToday: 'add' | 'save';
     doneIds: number[];
     hasDone: (id: number) => void;
+    onDelete: (id: number) => void;
 }
-const MyPlanCard = ({ plan, isToday, doneIds, hasDone }: MyPlanCardProps) => {
+const MyPlanCard = ({ plan, isToday, doneIds, hasDone ,onDelete }: MyPlanCardProps) => {
     const isDone = doneIds.includes(plan.id);
     return (
         <div className="flex items-center gap-4 rounded-2xl border border-neutral-800 bg-neutral-900/60 p-3">
@@ -64,6 +65,7 @@ const MyPlanCard = ({ plan, isToday, doneIds, hasDone }: MyPlanCardProps) => {
                 )}
 
                 <button
+                    onClick={()=>onDelete(plan.id)}
                     type="button"
                     aria-label="Remove"
                     className="p-1 text-neutral-500 hover:text-white"

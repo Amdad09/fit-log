@@ -48,6 +48,8 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
                                     '!bg-neutral-900 !border-neutral-700 !border-l-4 !border-l-lime-400',
                                 error: '!bg-neutral-900 !border-neutral-700 !border-l-4 !border-l-red-500',
                                 info: '!bg-neutral-900 !border-neutral-700 !border-l-4 !border-l-blue-400',
+                                warning:
+                                    '!bg-neutral-900 !border-neutral-700 !border-l-4 !border-l-red-400',
                             },
                         }}
                     />

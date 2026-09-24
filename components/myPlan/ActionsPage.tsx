@@ -7,12 +7,12 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 const ActionsPage = () => {
-    const { todayPlans, savePlans, times, cals } = useWorkout();
+    const { todayPlans, savePlans, times, cals, onDeletePlan, onDeleteSave } = useWorkout();
     const [isToday, setIsToday] = useState<'add' | 'save'>('add');
+    const [doneIds, setDoneIds] = useState<number[]>([]);
     
     const plans = isToday === 'add' ? todayPlans : savePlans;
-
-    const [doneIds, setDoneIds] = useState<number[]>([]);
+    const onDelete = isToday === 'add' ? onDeletePlan : onDeleteSave;
     const handleHasDone = (id: number) => {
         toast.success('Workout has done!')
         setDoneIds(prev => prev.includes(id) ? prev : [...prev, id]);
@@ -34,6 +34,7 @@ const ActionsPage = () => {
               isToday={isToday}
               doneIds={doneIds}
               hasDone={handleHasDone}
+              onDelete={onDelete}
           />
       </div>
   );

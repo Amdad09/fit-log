@@ -9,8 +9,9 @@ interface MyPlanListProps {
     isToday: 'add' | 'save';
     doneIds: number[];
     hasDone: (id: number) => void;
+    onDelete: (id: number) => void;
 }
-const MyPlanList = ({ plans, isToday, doneIds, hasDone }: MyPlanListProps) => {
+const MyPlanList = ({ plans, isToday, doneIds, hasDone, onDelete }: MyPlanListProps) => {
     return (
         <div className='pt-6'>
             {plans?.length === 0 ? (
@@ -28,6 +29,7 @@ const MyPlanList = ({ plans, isToday, doneIds, hasDone }: MyPlanListProps) => {
                             isToday={isToday}
                             doneIds={doneIds}
                             hasDone={hasDone}
+                            onDelete={onDelete}
                         />
                     ))}
                 </div>
