@@ -13,6 +13,12 @@ const Navbar = () => {
             <li>
                 <CustomLink path="/myPlan">My Plan</CustomLink>
             </li>
+            <li>
+                <CustomLink path="/myMeal">My Meal</CustomLink>
+            </li>
+            <li>
+                <CustomLink path="/addMeal">Add Meal</CustomLink>
+            </li>
         </>
     );
     return (

@@ -10,7 +10,7 @@ const WorkoutCard = ({workout}: {workout: Workout}) => {
           className="w-full max-w-xs text-left rounded-3xl bg-neutral-900 border border-neutral-800 overflow-hidden shadow-xl shadow-black/30 transition-transform hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-400"
       >
           {/* Image */}
-          <div className="relative h-44 w-full">
+          <div className="relative h-60 w-full">
               <Image
                   src={workout.image}
                   alt={workout.name}
