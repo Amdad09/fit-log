@@ -55,8 +55,8 @@ const MyPlanCard = ({ plan, isToday, doneIds, hasDone }: MyPlanCardProps) => {
                     <button
                         onClick={() => hasDone(plan.id)}
                         type="button"
-                        className={`flex items-center gap-1.5 rounded-full  px-4 py-1.5 text-sm font-semibold text-neutral-900  ${isDone ? 'bg-lime-400/30 ' : 'bg-primary hover:bg-lime-500'}`}
-                        disabled={isDone}
+                        className={`flex items-center gap-1.5 rounded-full  px-4 py-1.5 text-sm font-semibold text-neutral-900  ${isDone ? 'bg-lime-400/30 cursor-not-allowed ' : 'bg-primary hover:bg-lime-500'}`}
+                        // disabled={isDone}
                     >
                         <Check className="h-4 w-4" />
                         {isDone ? 'Completed' : 'Mark as Done'}

@@ -1,7 +1,8 @@
-import Link from 'next/link';
+
 import CustomLink from '../ui/CustomLink';
 import Container from '../ui/Container';
 import Logo from './Logo';
+import Actions from '../navbarActions/Actions';
 
 const Navbar = () => {
     const links = (
@@ -54,20 +55,7 @@ const Navbar = () => {
                     <div className="navbar-center hidden lg:flex">
                         <ul className="menu menu-horizontal px-1">{links}</ul>
                     </div>
-                    <div className="navbar-end font-semibold text-slate-400 gap-4">
-                        <Link href="/myPlan" className="">
-                            Plan{' '}
-                            <span className="text-slate-900 ml-2 bg-primary w-8 h-8 inline-flex items-center justify-center border rounded-full">
-                                0
-                            </span>
-                        </Link>
-                        <Link href="/myPlan" className="">
-                            Saved{' '}
-                            <span className="text-slate-400 ml-2 w-8 h-8 inline-flex items-center justify-center border rounded-full">
-                                0
-                            </span>
-                        </Link>
-                    </div>
+                    <Actions/>
                 </div>
             </Container>
         </div>

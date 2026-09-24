@@ -4,21 +4,26 @@ import MyPlanActions from "./MyPlanActions";
 import MyPlanList from "./MyPlanList";
 import Stats from "./Stats";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const ActionsPage = () => {
-    const { todayPlans, savePlans } = useWorkout();
+    const { todayPlans, savePlans, times, cals } = useWorkout();
     const [isToday, setIsToday] = useState<'add' | 'save'>('add');
+    
     const plans = isToday === 'add' ? todayPlans : savePlans;
 
     const [doneIds, setDoneIds] = useState<number[]>([]);
     const handleHasDone = (id: number) => {
+        toast.success('Workout has done!')
         setDoneIds(prev => prev.includes(id) ? prev : [...prev, id]);
     };
+
+    
 
   return (
       <div>
           {/* Stats */}
-          <Stats />
+          <Stats plans={plans} times={ times} cals={cals} />
 
           {/* Tabs + Sort */}
           <MyPlanActions isToday={isToday} setIsToday={setIsToday} />
