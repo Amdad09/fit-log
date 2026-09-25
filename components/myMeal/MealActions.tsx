@@ -6,6 +6,11 @@ import Link from "next/link";
 
 const MealActions = () => {
     const { meals, onDelete, onEdit } = useMeal();
+    const calories = meals.reduce((total, meal) => total + meal.calories, 0);
+    const fat = meals.reduce((total, meal) => total + meal.fat, 0);
+    const protien = meals.reduce((total, meal) => total + meal.protein, 0);
+    const carbons = meals.reduce((total, meal) => total + meal.carbs, 0);
+
   return (
       <div>
           <section className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
@@ -14,7 +19,7 @@ const MealActions = () => {
                       <Flame className="h-3.5 w-3.5 text-lime-400" />
                       Calories
                   </div>
-                  <p className="mt-3 text-3xl font-black text-white">1,590</p>
+                  <p className="mt-3 text-3xl font-black text-white">{calories}</p>
                   <p className="mt-1 text-xs text-neutral-500">kcal today</p>
               </div>
 
@@ -23,7 +28,7 @@ const MealActions = () => {
                       <Beef className="h-3.5 w-3.5 text-lime-400" />
                       Protein
                   </div>
-                  <p className="mt-3 text-3xl font-black text-white">101g</p>
+                  <p className="mt-3 text-3xl font-black text-white">{protien}g</p>
                   <p className="mt-1 text-xs text-neutral-500">consumed</p>
               </div>
 
@@ -32,7 +37,7 @@ const MealActions = () => {
                       <Wheat className="h-3.5 w-3.5 text-lime-400" />
                       Carbs
                   </div>
-                  <p className="mt-3 text-3xl font-black text-white">180g</p>
+                  <p className="mt-3 text-3xl font-black text-white">{carbons}g</p>
                   <p className="mt-1 text-xs text-neutral-500">consumed</p>
               </div>
 
@@ -41,7 +46,7 @@ const MealActions = () => {
                       <Droplet className="h-3.5 w-3.5 text-lime-400" />
                       Fat
                   </div>
-                  <p className="mt-3 text-3xl font-black text-white">42g</p>
+                  <p className="mt-3 text-3xl font-black text-white">{fat}g</p>
                   <p className="mt-1 text-xs text-neutral-500">consumed</p>
               </div>
           </section>
@@ -76,8 +81,8 @@ const MealActions = () => {
                               </h2>
                           </div>
 
-                          <span className="rounded-full border border-white/10 bg-[#1e1f24] px-3 py-1 text-xs text-gray-400">
-                              3 Meals
+                          <span className="rounded-full border border-white/10 bg-[#1e1f24] px-3 py-1 text-xs text-gray-400 hover:text-primary">
+                              {meals.length} Meals
                           </span>
                       </div>
 

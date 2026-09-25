@@ -24,7 +24,7 @@ const MyPlanList = ({
     return (
         <div className="pt-6">
             {sortedPlans?.length === 0 ? (
-                <div className="flex flex-col justify-center items-center h-80 rounded-lg border border-gray-900">
+                <div className="flex flex-col justify-center p-6 items-center h-80 rounded-lg border border-gray-900">
                     <h2 className="text-xl font-bold uppercase">
                         Nothing here{' '}
                         {isToday === 'add' ? "today plan's" : "Saved plan's"}{' '}

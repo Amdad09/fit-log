@@ -1,8 +1,9 @@
 import type { CreateMeal, Meal } from '@/types/meal';
+import { Beef, Droplet, Eye, Trash2, Wheat } from 'lucide-react';
 import Image from 'next/image';
-import { Beef, Wheat, Droplet, Eye, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import EditMealButton from '../addMeal/EditMealButton';
+import Button from '../ui/Button';
 
 interface MealCardProps {
     meal: Meal;
@@ -59,20 +60,19 @@ export default function MealCard({ meal, onDelete }: MealCardProps) {
                 </div>
 
                 {/* Actions */}
-                <div className="mt-4 flex gap-2">
-                    <Link
-                        href={`/myMeal/${meal.id}`}
-                        className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-lime-400 px-3 py-2 text-xs font-semibold text-neutral-900 transition hover:bg-lime-300"
-                    >
-                        <Eye className="h-3.5 w-3.5" />
-                        View Details
+                <div className="mt-4 flex justify-between items-center gap-2">
+                    <Link href={`/myMeal/${meal.id}`}>
+                        <Button className="w-full text-sm">
+                            <Eye className='w-5 h-5 mr-3'/>
+                            View Details
+                        </Button>
                     </Link>
-                    <EditMealButton meal={ meal} />
+                    <EditMealButton meal={meal} />
                     <button
                         type="button"
                         onClick={() => onDelete?.(meal.id)}
                         aria-label={`Delete ${meal.name}`}
-                        className="flex items-center justify-center rounded-xl border border-red-500/20 p-2 text-red-400 transition hover:bg-red-500/10"
+                        className="flex items-center w-15 justify-center rounded-xl border border-red-500/20 p-2 text-red-400 transition hover:bg-red-500/10"
                     >
                         <Trash2 className="h-4 w-4" />
                     </button>
