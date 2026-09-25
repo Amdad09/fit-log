@@ -13,8 +13,6 @@ interface WorkoutContextProps {
     onSave: (workout: Workout) => void;
     onDeletePlan: (id: number) => void;
     onDeleteSave: (id: number) => void;
-    times: number;
-    cals: number;
 }
 
 export const WorkoutContext = createContext < WorkoutContextProps| null>(null);
@@ -22,8 +20,6 @@ export const WorkoutContext = createContext < WorkoutContextProps| null>(null);
 const WorkoutContextProvider = ({ children }: WorkoutContextProviderProps) => {
     const [todayPlans, setTodayPlans] = useState<Workout[]>([]);
     const [savePlans, setSavePlans] = useState<Workout[]>([]);
-    const [times, setTimes] = useState<number>(0);
-    const [cals, setCals] = useState<number>(0);
 
     const handleAddTodayPlan = (workout: Workout) => {
         const alreadyAdded = todayPlans.some(plan => plan.id === workout.id);
@@ -32,8 +28,6 @@ const WorkoutContextProvider = ({ children }: WorkoutContextProviderProps) => {
         } else {
             toast.success(`Added ${workout.name} workout`);
             setTodayPlans(prev => [...prev, workout]);
-            setTimes((prev) => prev + workout.duration);
-            setCals((prev) => prev + workout.caloriesBurned);
         }
     };
 
@@ -44,8 +38,6 @@ const WorkoutContextProvider = ({ children }: WorkoutContextProviderProps) => {
         } else {
             toast.success(`Saved ${workout.name} workout`);
             setSavePlans(prev => [...prev, workout]);
-            setTimes(prev => prev + workout.duration);
-            setCals(prev => prev + workout.caloriesBurned);
         }
     };
 
@@ -65,8 +57,6 @@ const WorkoutContextProvider = ({ children }: WorkoutContextProviderProps) => {
         onSave: handleSaveNextPlan, 
         onDeletePlan: handleDeleteFromPlan,
         onDeleteSave: handleDeleteFromSave,
-        times: times,
-        cals: cals
     }
   return (
     <WorkoutContext.Provider value={data}>

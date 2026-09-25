@@ -1,12 +1,15 @@
 
-import { ChevronDown } from "lucide-react";
+// import { ChevronDown } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
+import MyPlanSort, { type SortOption } from "./MyPlanSort";
 interface MyPlanActionsProps {
     isToday: 'add' | 'save';
     setIsToday: Dispatch<SetStateAction<'add' | 'save'>>;
+    sorts: SortOption;
+    setSorts: Dispatch<SetStateAction<SortOption>>
 }
 
-const MyPlanActions = ({isToday, setIsToday}: MyPlanActionsProps) => {
+const MyPlanActions = ({isToday, setIsToday, sorts, setSorts}: MyPlanActionsProps) => {
     
   return (
       <div className="mt-6 flex items-center justify-between">
@@ -27,14 +30,7 @@ const MyPlanActions = ({isToday, setIsToday}: MyPlanActionsProps) => {
               </button>
           </div>
 
-          <button
-              type="button"
-              className="flex items-center gap-2 rounded-lg border border-neutral-800 bg-neutral-900 px-3 py-1.5 text-sm text-neutral-300"
-          >
-              <span className="text-neutral-500">Sort By</span>
-              <span>Duration</span>
-              <ChevronDown className="h-4 w-4 text-neutral-500" />
-          </button>
+          <MyPlanSort sorts={sorts} setSorts={setSorts} />
       </div>
   );
 };
