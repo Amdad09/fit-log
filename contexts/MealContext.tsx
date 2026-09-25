@@ -1,6 +1,6 @@
 'use client';
 import type { CreateMeal, Meal } from '@/types/meal';
-import { createContext, useState, type ReactNode } from 'react';
+import { createContext, useEffect, useState, type ReactNode } from 'react';
 import { toast } from 'sonner';
 
 interface MealContextProviderProps {
@@ -14,23 +14,28 @@ interface MealContextProps {
   onEdit: (id:string, updateMeal: CreateMeal) => void;
 }
 
-const initialMeal: Meal = {
-    id: '1',
-    name: 'Chicken & Rice',
-    type: 'Lunch',
-    calories: 550,
-    protein: 35,
-    carbs: 60,
-    fat: 15,
-    image: 'https://images.unsplash.com/photo-1532550907401-a500c9a57435',
-    notes: 'High-protein lunch after workout.',
-};
-
 export const MealContext = createContext<MealContextProps | null>(null);
 
 const MealContextProvider = ({ children }: MealContextProviderProps) => {
-    const [meals, setMeals] = useState<Meal[]>([initialMeal]);
+  const [meals, setMeals] = useState<Meal[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  
+  useEffect(() => {
+    
+    const storedMeals = localStorage.getItem('meals');
+    if (storedMeals) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setMeals(JSON.parse(storedMeals));
+    }
+    setIsLoading(true);
+  },[])
 
+  useEffect(() => {
+    if (!isLoading) return;
+    localStorage.setItem('meals', JSON.stringify(meals));
+    }, [meals, isLoading])
+  
+  
     const handleAddMeal = (meal: CreateMeal) => {
         const newMeal: Meal = {
             id: crypto.randomUUID(),

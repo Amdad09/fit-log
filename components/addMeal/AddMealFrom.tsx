@@ -6,14 +6,14 @@ import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 const initialMeal: CreateMeal = {
-    name: '',
-    type: 'Breakfast',
-    calories: 0,
-    protein: 0,
-    carbs: 0,
-    fat: 0,
-    image: '',
-    notes: '',
+    name: 'Grilled Chicken Rice',
+    type: 'Lunch',
+    calories: 520,
+    protein: 42,
+    carbs: 58,
+    fat: 12,
+    image: 'https://images.unsplash.com/photo-1532550907401-a500c9a57435',
+    notes: 'High-protein lunch with grilled chicken and rice.',
 };
 
 const AddMealForm = () => {
@@ -27,7 +27,6 @@ const MealForm = ({ mealId }: { mealId: string | null }) => {
     const { onAdd, onEdit, meals } = useMeal();
     const isEditMode = Boolean(mealId);
 
-    
     const [meal, setMeal] = useState<CreateMeal>(() => {
         const editingMeal = meals.find((m) => m.id === mealId);
         if (!editingMeal) return initialMeal;

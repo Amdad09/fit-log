@@ -1,6 +1,8 @@
 import MealActions from "@/components/myMeal/MealActions";
 import Container from "@/components/ui/Container";
 import Link from "next/link";
+// import { Suspense } from "react";
+// import LoadingMeal from "./loading";
 
 
 const MyMealsPage = () => {
@@ -25,13 +27,16 @@ const MyMealsPage = () => {
                         </p>
                     </div>
 
-                    <Link href='/addMeal' className="rounded-xl bg-[#ccff00] px-5 py-3 text-sm font-bold uppercase tracking-wide text-black transition hover:bg-[#b8e600]">
+                    <Link
+                        href="/addMeal"
+                        className="rounded-xl bg-[#ccff00] px-5 py-3 text-sm font-bold uppercase tracking-wide text-black transition hover:bg-[#b8e600]"
+                    >
                         + Add Meal
                     </Link>
                 </div>
-
-                <MealActions/>
-                
+                {/* <Suspense fallback={<LoadingMeal/>}> */}
+                    <MealActions />
+                {/* </Suspense> */}
             </Container>
         </main>
     );
