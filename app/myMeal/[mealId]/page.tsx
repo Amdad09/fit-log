@@ -1,18 +1,22 @@
 'use client'
 import Image from "next/image";
-import { Pencil, Trash2 } from 'lucide-react';
+import { HeartPlus } from 'lucide-react';
 import { use } from "react";
 import { useMeal } from "@/hooks/useMeal";
 import Container from "@/components/ui/Container";
+import Link from "next/link";
+import EditMealButton from "@/components/addMeal/EditMealButton";
 interface MealDetailsProps{
     params: Promise<{mealId: string}>
 }
 const MealDetails = ({ params }: MealDetailsProps) => {
     const { mealId } = use(params);
-    const {meals} = useMeal();
+    const {meals, onDelete} = useMeal();
     const meal = meals.find(meal => meal.id === mealId);
 
-    if(!meal) return <div>Not found the meal!</div>
+    if(!meal) return (
+        <Link href={'/myMeal'}></Link>
+    );
     // const meal = 
     const stats: { label: string; value: string | number }[] = [
         { label: 'Type', value: meal.type },
@@ -76,21 +80,14 @@ const MealDetails = ({ params }: MealDetailsProps) => {
 
                         {/* Actions */}
                         <div className="mt-8 flex gap-3">
+                            <EditMealButton meal={meal} />
                             <button
                                 type="button"
-                                //   onClick={() => onEdit?.(meal)}
-                                className="flex items-center gap-2 rounded-full bg-lime-400 px-5 py-2.5 text-sm font-semibold text-neutral-900 transition hover:bg-lime-300"
-                            >
-                                <Pencil className="h-4 w-4" />
-                                Edit
-                            </button>
-                            <button
-                                type="button"
-                                //   onClick={() => onDelete?.(meal)}
+                                  onClick={() => onDelete?.(meal.id)}
                                 className="flex items-center gap-2 rounded-full border border-red-500/20 px-5 py-2.5 text-sm font-semibold text-red-400 transition hover:bg-red-500/10"
                             >
-                                <Trash2 className="h-4 w-4" />
-                                Delete
+                                <HeartPlus className="h-4 w-4" />
+                               Add to Fav
                             </button>
                         </div>
                     </div>

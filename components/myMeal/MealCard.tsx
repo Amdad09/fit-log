@@ -1,19 +1,18 @@
-import type { Meal } from '@/types/meal';
+import type { CreateMeal, Meal } from '@/types/meal';
 import Image from 'next/image';
-import { Beef, Wheat, Droplet } from 'lucide-react';
+import { Beef, Wheat, Droplet, Eye, Trash2 } from 'lucide-react';
 import Link from 'next/link';
+import EditMealButton from '../addMeal/EditMealButton';
 
 interface MealCardProps {
     meal: Meal;
+    onDelete: (id: string) => void;
+    onEdit: (id: string, updateMeal: CreateMeal) => void;
 }
 
-export default function MealCard({ meal }: MealCardProps) {
+export default function MealCard({ meal, onDelete }: MealCardProps) {
     return (
-        
-        <Link href={`/myMeal/${meal.id}`}
-            
-            className="w-full max-w-xs text-left rounded-3xl bg-neutral-900 border border-neutral-800 overflow-hidden shadow-xl shadow-black/30 transition-transform hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-400"
-        >
+        <article className="w-full max-w-xs rounded-3xl bg-neutral-900 border border-neutral-800 overflow-hidden shadow-xl shadow-black/30 transition-transform hover:-translate-y-1">
             {/* Image */}
             <div className="relative h-44 w-full">
                 <Image
@@ -58,7 +57,27 @@ export default function MealCard({ meal }: MealCardProps) {
                         <span>{meal.fat}g</span>
                     </div>
                 </div>
+
+                {/* Actions */}
+                <div className="mt-4 flex gap-2">
+                    <Link
+                        href={`/myMeal/${meal.id}`}
+                        className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-lime-400 px-3 py-2 text-xs font-semibold text-neutral-900 transition hover:bg-lime-300"
+                    >
+                        <Eye className="h-3.5 w-3.5" />
+                        View Details
+                    </Link>
+                    <EditMealButton meal={ meal} />
+                    <button
+                        type="button"
+                        onClick={() => onDelete?.(meal.id)}
+                        aria-label={`Delete ${meal.name}`}
+                        className="flex items-center justify-center rounded-xl border border-red-500/20 p-2 text-red-400 transition hover:bg-red-500/10"
+                    >
+                        <Trash2 className="h-4 w-4" />
+                    </button>
+                </div>
             </div>
-        </Link>
+        </article>
     );
 }

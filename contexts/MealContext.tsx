@@ -1,14 +1,17 @@
-'use client'
-import type { Meal } from "@/types/meal";
-import { createContext, useState, type ReactNode } from "react";
+'use client';
+import type { CreateMeal, Meal } from '@/types/meal';
+import { createContext, useState, type ReactNode } from 'react';
+import { toast } from 'sonner';
 
-interface MealContextProviderProps{
-  children: ReactNode;
+interface MealContextProviderProps {
+    children: ReactNode;
 }
 
-interface MealContextProps{
-  meals: Meal[];
-  onAdd: (meal: Meal) => void;
+interface MealContextProps {
+    meals: Meal[];
+    onAdd: (meal: CreateMeal) => void;
+  onDelete: (id: string) => void;
+  onEdit: (id:string, updateMeal: CreateMeal) => void;
 }
 
 const initialMeal: Meal = {
@@ -23,24 +26,37 @@ const initialMeal: Meal = {
     notes: 'High-protein lunch after workout.',
 };
 
-export const MealContext = createContext<MealContextProps|null>(null);
+export const MealContext = createContext<MealContextProps | null>(null);
 
-const MealContextProvider = ({ children }:MealContextProviderProps) => {
-  const [meals, setMeals] = useState<Meal[]>([initialMeal]);
+const MealContextProvider = ({ children }: MealContextProviderProps) => {
+    const [meals, setMeals] = useState<Meal[]>([initialMeal]);
 
-  const handleAddMeal = (meal: Meal) => {
-    setMeals(prev => [...prev, meal]);
+    const handleAddMeal = (meal: CreateMeal) => {
+        const newMeal: Meal = {
+            id: crypto.randomUUID(),
+            ...meal,
+        };
+        setMeals((prev) => [...prev, newMeal]);
+    };
+
+  const handleEditMeal = (id: string, updateMeal: CreateMeal) => {
+    setMeals(prev => prev.map(meal => meal.id === id ? {
+      id: meal.id,
+      ...updateMeal
+    } : meal));
   };
-
-  const data: MealContextProps = {
-    meals,
-    onAdd: handleAddMeal
-  }
-  return (
-    <MealContext.Provider value={data}>
-        {children}
-    </MealContext.Provider>
-  );
+  
+    const handleDeleteMeal = (id: string) => {
+        setMeals((prev) => prev.filter((meal) => meal.id !== id));
+        toast.warning('Meal deleted!');
+    };
+    const data: MealContextProps = {
+        meals,
+        onAdd: handleAddMeal,
+      onDelete: handleDeleteMeal,
+        onEdit: handleEditMeal
+    };
+    return <MealContext.Provider value={data}>{children}</MealContext.Provider>;
 };
 
 export default MealContextProvider;

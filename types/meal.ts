@@ -9,3 +9,5 @@ export interface Meal {
     image: string;
     notes: string;
 }
+
+export type CreateMeal = Omit<Meal, 'id'>;

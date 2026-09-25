@@ -1,21 +1,99 @@
 'use client';
 
+import { useMeal } from '@/hooks/useMeal';
+import type { CreateMeal } from '@/types/meal';
+import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
-const AddMealFrom = () => {
+const initialMeal: CreateMeal = {
+    name: '',
+    type: 'Breakfast',
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fat: 0,
+    image: '',
+    notes: '',
+};
+
+const AddMealForm = () => {
+    const searchParams = useSearchParams();
+    const mealId = searchParams.get('id');
+
+    return <MealForm key={mealId ?? 'new'} mealId={mealId} />;
+};
+
+const MealForm = ({ mealId }: { mealId: string | null }) => {
+    const { onAdd, onEdit, meals } = useMeal();
+    const isEditMode = Boolean(mealId);
+
+    
+    const [meal, setMeal] = useState<CreateMeal>(() => {
+        const editingMeal = meals.find((m) => m.id === mealId);
+        if (!editingMeal) return initialMeal;
+
+        return {
+            name: editingMeal.name,
+            type: editingMeal.type,
+            calories: editingMeal.calories,
+            protein: editingMeal.protein,
+            carbs: editingMeal.carbs,
+            fat: editingMeal.fat,
+            image: editingMeal.image,
+            notes: editingMeal.notes,
+        };
+    });
+
+    const handleChange = (
+        e: React.ChangeEvent<
+            HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+        >,
+    ) => {
+        const { name, value } = e.target;
+
+        setMeal((prev) => ({
+            ...prev,
+            [name]: ['calories', 'protein', 'carbs', 'fat'].includes(name)
+                ? Number(value)
+                : value,
+        }));
+    };
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        if (isEditMode && mealId) {
+            onEdit(mealId, meal);
+        } else {
+            onAdd(meal);
+            setMeal(initialMeal);
+        }
+    };
+
     return (
-        <form className="space-y-6 rounded-2xl border border-white/10 bg-[#1e1f24] p-6 sm:p-8">
+        <form
+            onSubmit={handleSubmit}
+            className="space-y-6 rounded-2xl border border-white/10 bg-[#1e1f24] p-6 sm:p-8"
+        >
+            <h2 className="text-lg font-bold uppercase tracking-wide text-white">
+                {isEditMode ? 'Edit Meal' : 'Add Meal'}
+            </h2>
+
             {/* Meal Name */}
             <div>
                 <label
-                    htmlFor="mealName"
+                    htmlFor="name"
                     className="mb-2 block text-sm font-medium text-white"
                 >
                     Meal Name
                 </label>
-
                 <input
-                    id="mealName"
+                    id="name"
+                    name="name"
                     type="text"
+                    required
+                    value={meal.name}
+                    onChange={handleChange}
                     placeholder="e.g. Chicken & Rice"
                     className="w-full rounded-xl border border-white/10 bg-[#27292f] px-4 py-3 text-sm text-white outline-none transition placeholder:text-gray-500 focus:border-[#ccff00]"
                 />
@@ -24,30 +102,27 @@ const AddMealFrom = () => {
             {/* Meal Type */}
             <div>
                 <label
-                    htmlFor="mealType"
+                    htmlFor="type"
                     className="mb-2 block text-sm font-medium text-white"
                 >
                     Meal Type
                 </label>
-
                 <select
-                    id="mealType"
-                    defaultValue=""
+                    id="type"
+                    name="type"
+                    value={meal.type}
+                    onChange={handleChange}
                     className="w-full rounded-xl border border-white/10 bg-[#27292f] px-4 py-3 text-sm text-white outline-none focus:border-[#ccff00]"
                 >
-                    <option value="" disabled>
-                        Select meal type
-                    </option>
-                    <option value="breakfast">Breakfast</option>
-                    <option value="lunch">Lunch</option>
-                    <option value="dinner">Dinner</option>
-                    <option value="snack">Snack</option>
+                    <option value="Breakfast">Breakfast</option>
+                    <option value="Lunch">Lunch</option>
+                    <option value="Dinner">Dinner</option>
+                    <option value="Snack">Snack</option>
                 </select>
             </div>
 
             {/* Nutrition */}
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                {/* Calories */}
                 <div>
                     <label
                         htmlFor="calories"
@@ -55,16 +130,19 @@ const AddMealFrom = () => {
                     >
                         Calories
                     </label>
-
                     <input
                         id="calories"
                         type="number"
+                        name="calories"
+                        min={0}
+                        required
+                        value={meal.calories}
+                        onChange={handleChange}
                         placeholder="550"
                         className="w-full rounded-xl border border-white/10 bg-[#27292f] px-4 py-3 text-sm text-white outline-none placeholder:text-gray-500 focus:border-[#ccff00]"
                     />
                 </div>
 
-                {/* Protein */}
                 <div>
                     <label
                         htmlFor="protein"
@@ -72,16 +150,19 @@ const AddMealFrom = () => {
                     >
                         Protein (g)
                     </label>
-
                     <input
                         id="protein"
                         type="number"
+                        name="protein"
+                        min={0}
+                        required
+                        value={meal.protein}
+                        onChange={handleChange}
                         placeholder="35"
                         className="w-full rounded-xl border border-white/10 bg-[#27292f] px-4 py-3 text-sm text-white outline-none placeholder:text-gray-500 focus:border-[#ccff00]"
                     />
                 </div>
 
-                {/* Carbs */}
                 <div>
                     <label
                         htmlFor="carbs"
@@ -89,16 +170,19 @@ const AddMealFrom = () => {
                     >
                         Carbs (g)
                     </label>
-
                     <input
                         id="carbs"
                         type="number"
+                        name="carbs"
+                        min={0}
+                        required
+                        value={meal.carbs}
+                        onChange={handleChange}
                         placeholder="60"
                         className="w-full rounded-xl border border-white/10 bg-[#27292f] px-4 py-3 text-sm text-white outline-none placeholder:text-gray-500 focus:border-[#ccff00]"
                     />
                 </div>
 
-                {/* Fat */}
                 <div>
                     <label
                         htmlFor="fat"
@@ -106,10 +190,14 @@ const AddMealFrom = () => {
                     >
                         Fat (g)
                     </label>
-
                     <input
                         id="fat"
                         type="number"
+                        name="fat"
+                        min={0}
+                        required
+                        value={meal.fat}
+                        onChange={handleChange}
                         placeholder="15"
                         className="w-full rounded-xl border border-white/10 bg-[#27292f] px-4 py-3 text-sm text-white outline-none placeholder:text-gray-500 focus:border-[#ccff00]"
                     />
@@ -124,10 +212,13 @@ const AddMealFrom = () => {
                 >
                     Food Image URL
                 </label>
-
                 <input
                     id="image"
                     type="url"
+                    name="image"
+                    required
+                    value={meal.image}
+                    onChange={handleChange}
                     placeholder="https://example.com/food.jpg"
                     className="w-full rounded-xl border border-white/10 bg-[#27292f] px-4 py-3 text-sm text-white outline-none placeholder:text-gray-500 focus:border-[#ccff00]"
                 />
@@ -141,9 +232,11 @@ const AddMealFrom = () => {
                 >
                     Notes
                 </label>
-
                 <textarea
                     id="notes"
+                    name="notes"
+                    value={meal.notes}
+                    onChange={handleChange}
                     rows={4}
                     placeholder="Add some notes about this meal..."
                     className="w-full resize-none rounded-xl border border-white/10 bg-[#27292f] px-4 py-3 text-sm text-white outline-none placeholder:text-gray-500 focus:border-[#ccff00]"
@@ -155,10 +248,10 @@ const AddMealFrom = () => {
                 type="submit"
                 className="w-full rounded-xl bg-[#ccff00] px-5 py-3 font-bold uppercase tracking-wide text-black transition hover:bg-[#d8ff4d] active:scale-[0.98]"
             >
-                Add Meal
+                {isEditMode ? 'Save Changes' : 'Add Meal'}
             </button>
         </form>
     );
 };
 
-export default AddMealFrom;
+export default AddMealForm;
