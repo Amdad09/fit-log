@@ -6,8 +6,8 @@ const WorkoutsPage = async () => {
     const workouts = await getWorkouts();
     
     return (
-        <div className="pb-16 md:pb-20 lg:pb-24">
-            <WorkoutLibrary workouts={workouts}/>
+        <div id="library" className="pb-16 md:pb-20 lg:pb-24">
+            <WorkoutLibrary workouts={workouts} />
         </div>
     );
 };

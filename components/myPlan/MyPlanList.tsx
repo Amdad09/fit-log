@@ -3,6 +3,7 @@ import type { Workout } from '@/types/workout';
 
 import MyPlanCard from './MyPlanCard';
 import Link from 'next/link';
+import Button from '../ui/Button';
 
 interface MyPlanListProps {
     // plans: Workout[] | null;
@@ -23,21 +24,17 @@ const MyPlanList = ({
     return (
         <div className="pt-6">
             {sortedPlans?.length === 0 ? (
-                <div className="flex flex-col justify-center items-center h-60 rounded-lg border border-gray-900">
+                <div className="flex flex-col justify-center items-center h-80 rounded-lg border border-gray-900">
                     <h2 className="text-xl font-bold uppercase">
                         Nothing here{' '}
                         {isToday === 'add' ? "today plan's" : "Saved plan's"}{' '}
                         yet
                     </h2>
                     <p className="text-neutral-400 pt-1 pb-3">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit.
+                        Browse the library and add a lift to get today moving.
                     </p>
-                    <Link
-                        href="/"
-                        className="py-2 px-4 bg-primary text-neutral-900 font-semibold text-sm rounded-full"
-                    >
-                        Go to Workout
+                    <Link href="/">
+                        <Button className='mt-4'>Go to Workouts</Button>
                     </Link>
                 </div>
             ) : (

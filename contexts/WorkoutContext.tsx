@@ -1,6 +1,6 @@
 'use client';
 import type { Workout } from '@/types/workout';
-import { createContext, useEffect, useState, type ReactNode } from 'react';
+import { createContext, useEffect, useState, type Dispatch, type ReactNode, type SetStateAction } from 'react';
 import { toast } from 'sonner';
 interface WorkoutContextProviderProps {
     children: ReactNode;
@@ -13,6 +13,7 @@ interface WorkoutContextProps {
     onSave: (workout: Workout) => void;
     onDeletePlan: (id: number) => void;
     onDeleteSave: (id: number) => void;
+    setTodayPlans: Dispatch<SetStateAction<Workout[]>>
 }
 
 export const WorkoutContext = createContext<WorkoutContextProps | null>(null);
@@ -80,6 +81,7 @@ const WorkoutContextProvider = ({ children }: WorkoutContextProviderProps) => {
         onSave: handleSaveNextPlan,
         onDeletePlan: handleDeleteFromPlan,
         onDeleteSave: handleDeleteFromSave,
+        setTodayPlans
     };
     return (
         <WorkoutContext.Provider value={data}>

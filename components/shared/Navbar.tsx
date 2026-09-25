@@ -19,18 +19,21 @@ const Navbar = () => {
             <li>
                 <CustomLink path="/addMeal">Add Meal</CustomLink>
             </li>
+            <li>
+                <CustomLink path="/dashboard">Dashboard</CustomLink>
+            </li>
         </>
     );
     return (
         <div className="bg-base-100 shadow-sm border-b border-gray-800 z-50 top-0 sticky">
             <Container>
-                <div className="navbar">
+                <div className="navbar p-0">
                     <div className="navbar-start">
                         <div className="dropdown">
                             <div
                                 tabIndex={0}
                                 role="button"
-                                className="btn btn-ghost lg:hidden"
+                                className="pr-4 lg:hidden"
                             >
                                 <svg
                                     aria-label="Menu"
@@ -59,7 +62,7 @@ const Navbar = () => {
                         <Logo/>
                     </div>
                     <div className="navbar-center hidden lg:flex">
-                        <ul className="menu menu-horizontal px-1">{links}</ul>
+                        <ul className="menu menu-horizontal px-1 gap-1">{links}</ul>
                     </div>
                     <Actions/>
                 </div>

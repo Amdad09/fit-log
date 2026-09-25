@@ -1,7 +1,7 @@
 const LoadingPage = () => {
   return (
       <div className="min-h-screen flex justify-center items-center text-primary font-semibold">
-          Loading plans ...
+          Loading workouts ...
       </div>
   );
 };

@@ -1,25 +1,21 @@
-
-import Container from '@/components/ui/Container';
 import ActionsPage from '@/components/myPlan/ActionsPage';
+import SectionHeading from '@/components/sections/SectionHeading';
+import Container from '@/components/ui/Container';
 
 export default function MyPlanPage() {
-    
-  return (
-      <div className="bg-neutral-950 text-white py-16 md:py-20 lg:py-24">
-          <Container>
-              <div className="">
-                  {/* Header */}
-                  <h1 className="text-2xl font-extrabold tracking-tight">
-                      MY PLAN
-                  </h1>
-                  <p className="mt-1 text-sm text-neutral-400">
-                      Cap of five lifts for today. Finish them, then load more.
-                  </p>
+    return (
+        <div className="bg-neutral-950 text-white py-12 md:py-16 lg:py-20">
+            <Container>
+                <div className="">
+                    <SectionHeading
+                        eyebrow="Fitness"
+                        title="MY PLAN"
+                        description="Cap of five lifts for today. Finish them, then load more."
+                    />
 
-                  <ActionsPage/>
-                  
-              </div>
-          </Container>
-      </div>
-  );
+                    <ActionsPage />
+                </div>
+            </Container>
+        </div>
+    );
 }
