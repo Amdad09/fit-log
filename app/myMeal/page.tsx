@@ -1,10 +1,14 @@
 import MealActions from "@/components/myMeal/MealActions";
 import SectionHeading from "@/components/sections/SectionHeading";
 import Container from "@/components/ui/Container";
+import type { Metadata } from "next";
 import Link from "next/link";
 // import { Suspense } from "react";
 // import LoadingMeal from "./loading";
-
+export const metadata: Metadata = {
+    title: 'Meal page',
+    description: 'Meals page',
+};
 
 const MyMealsPage = () => {
 
@@ -23,7 +27,7 @@ const MyMealsPage = () => {
 
                     <Link
                         href="/addMeal"
-                        className="rounded-xl bg-[#ccff00] px-5 py-3 text-sm font-bold uppercase tracking-wide text-black transition hover:bg-[#b8e600] mb-6"
+                        className="rounded-xl bg-primary px-5 py-3 text-sm font-bold uppercase tracking-wide text-black transition hover:bg-lime-300 mb-6"
                     >
                         + Add Meal
                     </Link>

@@ -258,7 +258,7 @@ const MealForm = ({ mealId }: { mealId: string | null }) => {
                 {/* Button */}
                 <button
                     type="submit"
-                    className="w-full rounded-xl bg-primary px-5 py-3 font-bold tracking-wide text-neutral-800 transition hover:bg-lime-300 active:scale-[0.98]"
+                    className="w-full rounded-xl bg-primary px-5 py-3 font-bold tracking-wide text-neutral-800 transition cursor-pointer hover:bg-lime-300 active:scale-[0.98]"
                 >
                     {isEditMode ? 'Save Changes' : 'Add Meal'}
                 </button>

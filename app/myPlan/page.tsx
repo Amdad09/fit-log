@@ -1,6 +1,11 @@
 import ActionsPage from '@/components/myPlan/ActionsPage';
 import SectionHeading from '@/components/sections/SectionHeading';
 import Container from '@/components/ui/Container';
+import type { Metadata } from 'next';
+export const metadata: Metadata = {
+    title: 'Workout planning',
+    description: 'Workout planning page',
+};
 
 export default function MyPlanPage() {
     return (

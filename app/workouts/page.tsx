@@ -1,6 +1,12 @@
 import { getWorkouts } from '@/api/workouts';
 
 import WorkoutLibrary from '@/components/workout/WorkoutLibrary';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Home | Workout',
+    description: 'Workout page',
+};
 
 const WorkoutsPage = async () => {
     const workouts = await getWorkouts();

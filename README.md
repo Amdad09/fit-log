@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FitLog — Fitness & Workout Tracker
 
-## Getting Started
+FitLog is a modern fitness tracking web application designed to help users discover workouts, create daily workout plans, track their progress, and manage their meals in one place.
 
-First, run the development server:
+The project focuses on a clean, responsive user experience with practical workout and meal management features.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Live Demo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+🔗 **Live Website:** https://fit-log-ruby.vercel.app/
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📸 Features
 
-To learn more about Next.js, take a look at the following resources:
+### 🏋️ Workout Library
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Browse available workouts
+- Search workouts by name
+- View detailed workout information
+- See workout duration, calories burned, equipment, and rating
+- Responsive workout cards
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 📋 My Plan
 
-## Deploy on Vercel
+- Add workouts to today's plan
+- Save workouts for later
+- Mark workouts as completed
+- Track daily workout progress
+- Visual 5-step progress tracker
+- View completed workouts directly from the progress tracker
+- Sort workouts by:
+  - Duration
+  - Calories
+  - Rating
+- Delete workouts from the plan
+- Celebration animation after completing all 5 workouts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🍱 Meal Management
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Add meals
+- View meal information
+- Edit existing meals
+- Delete meals
+- Manage meals from a dedicated My Meal section
+
+### 🎨 User Interface
+
+- Fully responsive design
+- Mobile, tablet, and desktop layouts
+- Dark-themed modern interface
+- Reusable UI components
+- Smooth hover and transition effects
+- Framer Motion animations
+- Toast notifications for user actions
+
+---
+
+## 🛠️ Technologies Used
+
+### Frontend
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- DaisyUI
+- Framer Motion
+
+### State Management
+
+- React Context API
+- React Hooks
+
+### UI & UX
+
+- Responsive Design
+- Sonner Toast
+- Lucide React Icons
+- Next.js Image
+- CSS transitions and animations
+
+---
+
+## 📂 Project Structure
+
+```text
+src/
+├── app/
+│   ├── dashboard/
+│   ├── myMeal/
+│   ├── myPlan/
+│   ├── workouts/
+│   ├── addMeal/
+│   ├── layout.tsx
+│   └── page.tsx
+│
+├── components/
+│   ├── common/
+│   ├── workout/
+│   ├── meal/
+│   ├── myPlan/
+│   └── ...
+│
+├── context/
+│   └── WorkoutContext.tsx
+│
+├── hooks/
+│   └── useWorkout.ts
+│
+├── types/
+│   ├── workout.ts
+│   └── meal.ts
+│
+└── data/
+    └── ...

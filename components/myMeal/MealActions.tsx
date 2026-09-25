@@ -3,6 +3,7 @@ import {Flame, Beef, Wheat, Droplet} from "lucide-react";
 import { useMeal } from "@/hooks/useMeal";
 import MealCard from "./MealCard";
 import Link from "next/link";
+import Button from "../ui/Button";
 
 const MealActions = () => {
     const { meals, onDelete, onEdit } = useMeal();
@@ -19,7 +20,9 @@ const MealActions = () => {
                       <Flame className="h-3.5 w-3.5 text-lime-400" />
                       Calories
                   </div>
-                  <p className="mt-3 text-3xl font-black text-white">{calories}</p>
+                  <p className="mt-3 text-3xl font-black text-white">
+                      {calories}
+                  </p>
                   <p className="mt-1 text-xs text-neutral-500">kcal today</p>
               </div>
 
@@ -28,7 +31,9 @@ const MealActions = () => {
                       <Beef className="h-3.5 w-3.5 text-lime-400" />
                       Protein
                   </div>
-                  <p className="mt-3 text-3xl font-black text-white">{protien}g</p>
+                  <p className="mt-3 text-3xl font-black text-white">
+                      {protien}g
+                  </p>
                   <p className="mt-1 text-xs text-neutral-500">consumed</p>
               </div>
 
@@ -37,7 +42,9 @@ const MealActions = () => {
                       <Wheat className="h-3.5 w-3.5 text-lime-400" />
                       Carbs
                   </div>
-                  <p className="mt-3 text-3xl font-black text-white">{carbons}g</p>
+                  <p className="mt-3 text-3xl font-black text-white">
+                      {carbons}g
+                  </p>
                   <p className="mt-1 text-xs text-neutral-500">consumed</p>
               </div>
 
@@ -53,19 +60,15 @@ const MealActions = () => {
           {/* Meals */}
           <section className="mt-14">
               {meals.length === 0 ? (
-                  <div className="flex flex-col justify-center items-center h-60 rounded-lg border-2 border-gray-800">
+                  <div className="flex flex-col justify-center items-center h-70 rounded-lg border-2 border-gray-800 p-6 text-center">
                       <h2 className="text-xl font-bold uppercase">
                           Nothing here yet
                       </h2>
                       <p className="text-neutral-400 pt-1 pb-3">
-                          Lorem ipsum, dolor sit amet consectetur adipisicing
-                          elit.
+                          Proper nutrition is just as important as exercise
                       </p>
-                      <Link
-                          href="/addMeal"
-                          className="rounded-xl bg-[#ccff00] px-5 py-3 text-sm font-bold uppercase tracking-wide text-black transition hover:bg-[#b8e600]"
-                      >
-                          + Add Meal
+                      <Link href="/addMeal">
+                          <Button className="mt-4 hover:bg-lime-300">+ Add Meal</Button>
                       </Link>
                   </div>
               ) : (

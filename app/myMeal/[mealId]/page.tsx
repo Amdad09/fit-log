@@ -6,6 +6,7 @@ import { useMeal } from "@/hooks/useMeal";
 import Container from "@/components/ui/Container";
 import Link from "next/link";
 import EditMealButton from "@/components/addMeal/EditMealButton";
+
 interface MealDetailsProps{
     params: Promise<{mealId: string}>
 }

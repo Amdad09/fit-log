@@ -1,9 +1,13 @@
 import { getWorkout } from "@/api/workouts";
 import Container from "@/components/ui/Container";
 import WorkoutActions from "@/components/workout/WorkoutActions";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-
+export const metadata: Metadata = {
+    title: 'Workout details',
+    description: 'Workout details page',
+};
 interface WorkoutDetailsProps{
     params: Promise<{workoutId: number }>;
 }
