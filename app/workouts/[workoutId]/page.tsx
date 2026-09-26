@@ -44,7 +44,7 @@ const WorkoutDetails = async ({ params }: WorkoutDetailsProps) => {
                     </span>
                 </div>
 
-                <div className="grid grid-cols-1 gap-10  p-6 text-white md:grid-cols-2 md:p-10">
+                <div className="grid grid-cols-1 gap-10 text-white md:grid-cols-2 pt-6">
                     {/* Image */}
                     <div className="relative h-80 w-full overflow-hidden rounded-3xl md:h-full">
                         <Image

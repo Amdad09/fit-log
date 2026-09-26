@@ -40,3 +40,7 @@
   --color-base-300: #202127;
   --color-base-content: #f4f5f2;
 }
+
+html{
+  scroll-behavior: smooth;
+}

@@ -3,6 +3,7 @@ import Container from '../ui/Container';
 import Button from '../ui/Button';
 import HeroContentMotion from '../motion/HeroContextMotion';
 import HeroImageMotion from '../motion/HeroImageMotion';
+import { Dumbbell } from 'lucide-react';
 const Hero = () => {
     return (
         <section className="bg-base-100 py-6 sm:py-8 md:py-10 lg:py-14">
@@ -30,6 +31,7 @@ const Hero = () => {
                                     className="mt-6 flex justify-center lg:justify-start"
                                 >
                                     <Button className="px-6">
+                                        <Dumbbell className='mr-2 h-4 w-4'/>
                                         Browse Workouts
                                     </Button>
                                 </a>

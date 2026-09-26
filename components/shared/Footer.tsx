@@ -3,7 +3,7 @@ import Logo from "./Logo";
 
 const Footer = () => {
     return (
-        <div className="bg-neutral text-neutral-content py-16 md:py-20 lg:py-24">
+        <div className="bg-base-100 border-t border-gray-800 text-neutral-content py-16 md:py-20 lg:py-24">
             <Container>
                 <footer className="footer sm:footer-horizontal  items-center">
                     <aside className="grid-flow-col items-center">
