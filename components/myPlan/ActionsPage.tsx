@@ -51,6 +51,9 @@ const ActionsPage = () => {
         setTodayPlans((prev) => prev.filter((plan) => plan.id !== id));
     };
 
+    const calories = donePlans.reduce((total, plan) => total + plan.caloriesBurned, 0);
+    const times = donePlans.reduce((total, plan) => total + plan.duration, 0);
+
     const sortedPlans = [...plans].sort((a, b) => {
         if (sorts === 'Duration') {
             return a.duration - b.duration;
@@ -86,8 +89,21 @@ const ActionsPage = () => {
                             <p className="mt-1 text-xl font-bold tracking-tight text-base-content sm:text-2xl">
                                 {donePlans.length}
                                 <span className="text-base-content/40">/5</span>
+                                <span className="text-sm font-medium text-base-content/50">
+                                    exercises
+                                </span>
+
+                                <span className="ml-2">{calories}</span>
+                                <span className="text-sm font-medium text-base-content/50">
+                                    calories
+                                </span>
+                                <span className="ml-2">{times}</span>
+                                <span className="text-sm font-medium text-base-content/50">
+                                    minutes
+                                </span>
+
                                 <span className="ml-2 text-sm font-medium text-base-content/50">
-                                    completed
+                                    (Completed)
                                 </span>
                             </p>
                         </div>

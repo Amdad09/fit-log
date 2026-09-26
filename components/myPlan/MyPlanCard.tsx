@@ -63,6 +63,7 @@ const MyPlanCard = ({ plan, isToday, doneIds, hasDone ,onDelete }: MyPlanCardPro
                             type="button"
                             aria-label={`Remove ${plan.name}`}
                             className="
+                            md:hidden
                         shrink-0 rounded-full p-2
                         text-neutral-500
                         transition-colors duration-200
@@ -70,7 +71,7 @@ const MyPlanCard = ({ plan, isToday, doneIds, hasDone ,onDelete }: MyPlanCardPro
                         hover:text-red-400
                     "
                         >
-                            <X className="h-4 w-4" />
+                            <X className="h-7 w-7" />
                         </button>
                     </div>
 
@@ -146,6 +147,23 @@ const MyPlanCard = ({ plan, isToday, doneIds, hasDone ,onDelete }: MyPlanCardPro
                             {isDone ? 'Completed' : 'Mark as Done'}
                         </Button>
                     )}
+                    <button
+                        onClick={() => onDelete(plan.id)}
+                        type="button"
+                        aria-label={`Remove ${plan.name}`}
+                        className="
+                            hidden md:block
+                        shrink-0 rounded-full p-2
+                        text-neutral-500
+                        transition-colors duration-200
+                        hover:bg-red-500/10
+                        hover:text-red-400
+                        cursor-pointer
+                    "
+                        title='Remove from plan'
+                    >
+                        <X className="" />
+                    </button>
                 </div>
             </div>
         </div>
