@@ -4,7 +4,7 @@ import { useMeal } from "@/hooks/useMeal";
 import MealCard from "./MealCard";
 import Link from "next/link";
 import Button from "../ui/Button";
-
+import {motion} from 'framer-motion'
 const MealActions = () => {
     const { meals, onDelete, onEdit } = useMeal();
     const calories = meals.reduce((total, meal) => total + meal.calories, 0);
@@ -68,7 +68,9 @@ const MealActions = () => {
                           Proper nutrition is just as important as exercise
                       </p>
                       <Link href="/addMeal">
-                          <Button className="mt-4 hover:bg-lime-300">+ Add Meal</Button>
+                          <Button className="mt-4 hover:bg-lime-300">
+                              + Add Meal
+                          </Button>
                       </Link>
                   </div>
               ) : (
@@ -91,13 +93,23 @@ const MealActions = () => {
 
                       {/* Cards */}
                       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                          {meals.map((meal) => (
-                              <MealCard
-                                  key={meal.id}
-                                  meal={meal}
-                                  onDelete={onDelete}
-                                  onEdit={onEdit}
-                              />
+                          {meals.map((meal, index) => (
+                              <motion.div
+                                  initial={{ opacity: 0, y: 20 }}
+                                  whileInView={{ opacity: 1, y: 0 }}
+                                  viewport={{once: true, amount: 0.15}}
+                                  transition={{
+                                      duration: 0.4,
+                                      delay: index * 0.05,
+                                      ease: 'easeOut'
+                                  }}
+                                  key={meal.id}>
+                                  <MealCard
+                                      meal={meal}
+                                      onDelete={onDelete}
+                                      onEdit={onEdit}
+                                  />
+                              </motion.div>
                           ))}
                       </div>
                   </div>

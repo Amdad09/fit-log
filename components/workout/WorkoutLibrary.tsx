@@ -1,4 +1,5 @@
 'use client'
+import {motion} from 'framer-motion'
 import type { Workout } from '@/types/workout';
 import { useState } from 'react';
 import Search from '../search/Search';
@@ -16,7 +17,7 @@ const WorkoutLibrary = ({ workouts }: WorkoutLibraryProps) => {
     );
 
     return (
-        <Container className='py-12 md:py-16 lg:py-20'>
+        <Container className="py-12 md:py-16 lg:py-20">
             <div className="flex flex-col gap-6 md:gap-8 lg:flex-row lg:items-end lg:justify-between">
                 <SectionHeading
                     eyebrow="FITNESS"
@@ -29,9 +30,23 @@ const WorkoutLibrary = ({ workouts }: WorkoutLibraryProps) => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {filterWorkouts.map((workout) => (
-                    <WorkoutCard key={workout.id} workout={workout} />
+            <div
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            >
+                {filterWorkouts.map((workout, index) => (
+                    <motion.div
+                        key={workout.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.15 }}
+                        transition={{
+                            duration: 0.4,
+                            delay: index * 0.05,
+                            ease: 'easeOut',
+                        }}
+                    >
+                        <WorkoutCard workout={workout} />
+                    </motion.div>
                 ))}
             </div>
         </Container>

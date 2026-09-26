@@ -6,14 +6,16 @@ import { CalendarPlus, CloudCheck } from 'lucide-react';
 import Button from '../ui/Button';
 
 const WorkoutActions = ({ workout }: { workout: Workout }) => {
-    const { onAdd, onSave } = useWorkout();
+    const { onAdd, onSave, donePlans, todayPlans } = useWorkout();
     return (
         <div className="mt-8 flex gap-3">
             <Button
-                onClick={() => onAdd(workout)}
+                onClick={() => {
+                    onAdd(workout)
+                }}
                 type="button"
-                //   onClick={() => onAddToPlan?.(workout)}
-                className=""
+                disabled={(todayPlans.length + donePlans.length) === 5}
+                title='You can not select more than 5 workouts'
             >
                 {/* <CalendarPlus className="h-4 w-4" /> */}
                 <CalendarPlus className='mr-2'/>

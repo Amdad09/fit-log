@@ -6,12 +6,12 @@ import Button from '../ui/Button';
 interface MyPlanCardProps {
     plan: Workout;
     isToday: 'add' | 'save';
-    doneIds: number[];
-    hasDone: (id: number) => void;
+    donePlans: Workout[];
+    hasDone: (workout: Workout) => void;
     onDelete: (id: number) => void;
 }
-const MyPlanCard = ({ plan, isToday, doneIds, hasDone ,onDelete }: MyPlanCardProps) => {
-    const isDone = doneIds.includes(plan.id);
+const MyPlanCard = ({ plan, isToday, hasDone ,onDelete }: MyPlanCardProps) => {
+    // const isDone = doneIds.includes(plan.id);
     return (
         <div
             className="
@@ -134,17 +134,15 @@ const MyPlanCard = ({ plan, isToday, doneIds, hasDone ,onDelete }: MyPlanCardPro
                         transition-all duration-200
                         lg:flex-none
                         ${
-                            isDone
-                                ? 'cursor-not-allowed bg-lime-400/50 text-neutral-900'
-                                : 'bg-primary text-neutral-950 hover:bg-lime-300'
+                           
+                                'bg-primary text-neutral-950 hover:bg-lime-300'
                         }
                     `}
-                            onClick={() => hasDone(plan.id)}
+                            onClick={() => hasDone(plan)}
                             type="button"
-                            disabled={isDone}
                         >
                             <Check className="mr-1 h-4 w-4" />
-                            {isDone ? 'Completed' : 'Mark as Done'}
+                            {'Mark as Done'}
                         </Button>
                     )}
                     <button

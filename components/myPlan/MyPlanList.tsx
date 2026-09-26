@@ -4,20 +4,21 @@ import type { Workout } from '@/types/workout';
 import MyPlanCard from './MyPlanCard';
 import Link from 'next/link';
 import Button from '../ui/Button';
+import CardMotion from '../motion/CardMotion';
 
 interface MyPlanListProps {
     // plans: Workout[] | null;
     sortedPlans: Workout[] | null;
     isToday: 'add' | 'save';
-    doneIds: number[];
-    hasDone: (id: number) => void;
+    donePlans: Workout[];
+    hasDone: (workout: Workout) => void;
     onDelete: (id: number) => void;
 }
 const MyPlanList = ({
     sortedPlans,
     // plans,
     isToday,
-    doneIds,
+    donePlans,
     hasDone,
     onDelete,
 }: MyPlanListProps) => {
@@ -34,20 +35,21 @@ const MyPlanList = ({
                         Browse the library and add a lift to get today moving.
                     </p>
                     <Link href="/">
-                        <Button className='mt-4'>Go to Workouts</Button>
+                        <Button className="mt-4" disabled={donePlans.length === 5}title='Not available for today!'>Go to Workouts</Button>
                     </Link>
                 </div>
             ) : (
                 <div className="mt-4 space-y-3">
                     {sortedPlans?.map((plan) => (
-                        <MyPlanCard
-                            key={plan.id}
-                            plan={plan}
-                            isToday={isToday}
-                            doneIds={doneIds}
-                            hasDone={hasDone}
-                            onDelete={onDelete}
-                        />
+                        <CardMotion key={plan.id}>
+                            <MyPlanCard
+                                plan={plan}
+                                isToday={isToday}
+                                donePlans={donePlans}
+                                hasDone={hasDone}
+                                onDelete={onDelete}
+                            />
+                        </CardMotion>
                     ))}
                 </div>
             )}

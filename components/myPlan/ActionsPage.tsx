@@ -1,55 +1,39 @@
 'use client';
 import { useWorkout } from '@/hooks/useWorkout';
-import { useEffect, useState } from 'react';
-import { toast } from 'sonner';
+import { useState } from 'react';
 import MyPlanActions from './MyPlanActions';
 import MyPlanList from './MyPlanList';
 import type { SortOption } from './MyPlanSort';
 import Stats from './Stats';
-import type { Workout } from '@/types/workout';
 import Link from 'next/link';
 import WorkoutComplete from './WorkoutComplete';
 // import { useSearchParams } from "next/navigation";
 
 const ActionsPage = () => {
-    const { todayPlans, setTodayPlans, savePlans, onDeletePlan, onDeleteSave } =
+    const { todayPlans, hasDone, donePlans, savePlans, onDeletePlan, onDeleteSave } =
         useWorkout();
     // const searchParams = useSearchParams();
     // const tab = searchParams.get('tab');
     const [isToday, setIsToday] = useState<'add' | 'save'>('add');
 
-    const [doneIds, setDoneIds] = useState<number[]>([]);
-    const [donePlans, setDonePlans] = useState<Workout[]>([]);
+    // const [doneIds, setDoneIds] = useState<number[]>([]);
+    // const [donePlans, setDonePlans] = useState<Workout[]>([]);
     const [sorts, setSorts] = useState<SortOption>('Duration');
 
     const plans = isToday === 'add' ? todayPlans : savePlans;
     const onDelete = isToday === 'add' ? onDeletePlan : onDeleteSave;
-    const [isLoading, setIsLoading] = useState(false);
+    
 
-    useEffect(() => {
-        const storedPlan = localStorage.getItem('donePlans');
-        if (storedPlan) {
-            // eslint-disable-next-line react-hooks/set-state-in-effect
-            setDonePlans(JSON.parse(storedPlan));
-        }
-        setIsLoading(true);
-    },[])
+    // const handleHasDone = (id: number) => {
+    //     const workout = todayPlans.find((plan) => plan.id === id);
 
-    useEffect(() => {
-        if (!isLoading) return;
-        localStorage.setItem('donePlans', JSON.stringify(donePlans));
-    },[donePlans, isLoading])
+    //     if (!workout) return;
 
-    const handleHasDone = (id: number) => {
-        const workout = todayPlans.find((plan) => plan.id === id);
-
-        if (!workout) return;
-
-        toast.success('Workout has done!');
-        setDoneIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
-        setDonePlans((prev) => [...prev, workout]);
-        setTodayPlans((prev) => prev.filter((plan) => plan.id !== id));
-    };
+    //     toast.success('Workout has done!');
+    //     setDoneIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+    //     setDonePlans((prev) => [...prev, workout]);
+    //     setTodayPlans((prev) => prev.filter((plan) => plan.id !== id));
+    // };
 
     const calories = donePlans.reduce((total, plan) => total + plan.caloriesBurned, 0);
     const times = donePlans.reduce((total, plan) => total + plan.duration, 0);
@@ -103,7 +87,7 @@ const ActionsPage = () => {
                                 </span>
 
                                 <span className="ml-2 text-sm font-medium text-base-content/50">
-                                    (Completed)
+                                    ({donePlans.length < 5 ? 'Continue...' : 'Completed'})
                                 </span>
                             </p>
                         </div>
@@ -176,8 +160,8 @@ const ActionsPage = () => {
                 //   plans={plans}
                 sortedPlans={sortedPlans}
                 isToday={isToday}
-                doneIds={doneIds}
-                hasDone={handleHasDone}
+                donePlans={donePlans}
+                hasDone={hasDone}
                 onDelete={onDelete}
             />
         </div>
