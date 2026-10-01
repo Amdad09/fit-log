@@ -1,8 +1,8 @@
 @import "tailwindcss";
+@import "@heroui/styles";
 @plugin "daisyui" {
   themes: mylight --default, mydark --prefersdark;
 }
-
 @plugin "daisyui/theme" {
   name: "mylight";
   default: true;
@@ -40,6 +40,7 @@
   --color-base-300: #202127;
   --color-base-content: #f4f5f2;
 }
+
 
 html{
   scroll-behavior: smooth;
